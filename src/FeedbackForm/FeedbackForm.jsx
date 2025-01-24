@@ -1,5 +1,19 @@
 import { useId } from "react";
 import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+
+const FeedbackSchema = Yup.object().shape({
+  username: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  email: Yup.string().email("Must be a valid email!").required("Required"),
+  message: Yup.string()
+    .min(3, "Too short")
+    .max(256, "Too long")
+    .required("Required"),
+  level: Yup.string().oneOf(["good", "neutral", "bad"]).required("Required"),
+});
 
 const initialValues = {
   username: "",
@@ -18,7 +32,11 @@ const FeedbackForm = () => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validationSchema={FeedbackSchema}
+    >
       <Form>
         <label htmlFor={nameFieldId}>Username</label>
         <Field type="text" name="username" id={nameFieldId} />
