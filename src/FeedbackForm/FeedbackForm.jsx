@@ -9,6 +9,8 @@ const initialValues = {
 const FeedbackForm = () => {
   const nameFieldId = useId();
   const emailFieldId = useId();
+  const msgFieldId = useId();
+  const levelFieldId = useId();
 
   const handleSubmit = (values, actions) => {
     console.log(values);
@@ -23,6 +25,12 @@ const FeedbackForm = () => {
 
         <label htmlFor={emailFieldId}>Email</label>
         <Field type="email" name="email" id={emailFieldId} />
+        <Field as="textarea" name="message" id={msgFieldId} rows="5" />
+        <Field as="select" name="level" id={levelFieldId}>
+          <option value="good">Good</option>
+          <option value="neutral">Neutral</option>
+          <option value="bad">Bad</option>
+        </Field>
 
         <button type="submit">Submit</button>
       </Form>
