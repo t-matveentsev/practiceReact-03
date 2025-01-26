@@ -23,7 +23,9 @@ const ControlledForm = () => {
       return setFormData((prev) => ({ ...prev, [name]: !prev[name] }));
     }
 
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => {
+      return { ...prev, [name]: value };
+    });
   };
 
   return (
